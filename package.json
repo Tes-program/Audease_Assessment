@@ -1,0 +1,31 @@
+{
+  "name": "audease_assessment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "watch": "tsc -p tsconfig.json -w",
+    "start": "node dist/index.js",
+    "knex:create": "knex migrate:make --knexfile ./knexfile.ts",
+    "knex:migrate": "knex migrate:latest --knexfile ./knexfile.ts",
+    "knex:rollback": "knex migrate:rollback --knexfile ./knexfile.ts",
+    "knex:seed:create": "knex seed:make --knexfile ./knexfile.ts $1",
+    "knex:seed:run": "knex seed:run --knexfile ./knexfile.ts $1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.12.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "knex": "^3.1.0",
+    "nodemon": "^3.1.0",
+    "pg": "^8.11.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
+  }
+}
