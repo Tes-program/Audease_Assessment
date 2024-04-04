@@ -6,7 +6,7 @@ import { TokenPayload } from "../../utils/interfaces/token.interface";
 
 
 export class UsersService {
-    public static async createUser(username: string, password: string): Promise<TokenPayload> {
+    public static async createUser(username: string, password: string): Promise<TokenPayload>  {
         const existingUser = await UserModels.findUserByUsername(username);
         if (existingUser) {
             throw new UnauthorizedError("Username already exists");
@@ -26,6 +26,14 @@ export class UsersService {
         }
         const token = generateAuthTokens(user.id);
         return token;
+    }
+
+    public static async deleteUser(user: string): Promise<void> {
+        const userId = await UserModels.findUserById(user as string);
+        if (!userId) {
+            throw new NotFoundError("User not found");
+        }
+        await UserModels.deleteUser(user as string);
     }
 
     public static async verifyUser(user: string): Promise<IUsers> {

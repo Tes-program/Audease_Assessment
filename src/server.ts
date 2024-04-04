@@ -24,3 +24,5 @@ app.get("/", (_req, res) => {
 app.listen(env.PORT, () => {
     logger.info(`Server is running on port ${env.PORT} 🚀`);
 });
+
+export { app };

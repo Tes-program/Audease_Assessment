@@ -37,6 +37,7 @@ export const generateAuthTokens = (userId: string) => {
       env.JWT_SECRET
     );
     return {
+        id: userId,
         token: {
             access: accessToken,
             expires,

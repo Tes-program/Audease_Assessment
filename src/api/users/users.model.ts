@@ -16,6 +16,10 @@ export class UserModels {
     }
 
     public static async findUserById(id: string): Promise<IUsers | undefined> {
-        return this.db().where({ id }).first();
+        return (await this.db().where({ id }).limit(1))[0];
+    }
+
+    public static async deleteUser(id: string): Promise<void> {
+        return this.db().where({ id }).del();
     }
 }
