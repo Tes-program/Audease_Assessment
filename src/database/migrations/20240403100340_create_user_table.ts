@@ -3,7 +3,7 @@ import type { Knex } from "knex";
 const tableName = 'users';
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable(tableName, (table) => {
-        table.increments('id').primary();
+        table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
         table.string('username').notNullable();
         table.string('password').notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
