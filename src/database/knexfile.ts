@@ -27,4 +27,6 @@ const commonConfig: Knex.Config = {
   }
 };
 
+
+
 export default { [environments]: commonConfig}
