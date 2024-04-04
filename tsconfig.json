@@ -23,8 +23,8 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
-    "rootDir": "./src"
+    "rootDir": "./"
   },
   "exclude": ["node_modules", "src/database/knexfile.ts"],
-  "include": ["./src/**/*.ts", "__tests__/**/*.ts"]
+  "include": ["./src/**/*.ts"]
 }

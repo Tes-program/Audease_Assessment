@@ -1,0 +1,25 @@
+# Ignore Node modules
+node_modules/
+
+# Ignore build directories
+dist/
+build/
+
+# Ignore logs
+*.log
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore version control directories
+.git/
+.github/
+.vscode/
+
+# Ignore testing files and directories
+__tests__/
+coverage/
+*.test.*
+
+# Ignore any other files or directories you don't want to include in the Docker image
