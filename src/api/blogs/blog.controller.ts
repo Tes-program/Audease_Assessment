@@ -26,9 +26,10 @@ export class BlogController {
         }
     }
 
-    public static async findBlogByAuthorId(req: Request, res: Response) {
+    public static async findBlogByAuthorId(req: AuthenticatedRequest, res: Response) {
+        const userId = req.user?.userId as string;
         try {
-            const blog = await BlogService.findBlogByAuthorId(req.params.author_id);
+            const blog = await BlogService.findBlogByAuthorId(userId);
             res.status(200).json(blog);
         } catch (error: any) {
             res.status(error.httpCode || 500).json({ error: error.message });
@@ -56,7 +57,7 @@ export class BlogController {
     public static async deleteBlogById(req: AuthenticatedRequest, res: Response) {
         try {
             await BlogService.deleteBlogById(req.params.id);
-            res.status(204).json();
+            res.status(204).json({message: "Blog deleted successfully"});
         } catch (error: any) {
             res.status(error.httpCode || 500).json({ error: error.message });
         }

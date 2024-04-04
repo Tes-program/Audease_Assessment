@@ -8,7 +8,12 @@ export class BlogModels {
     public static db = () => db<IBlogs>(BlogModels.tableName);
 
     public static async createBlog(blog: Partial<IBlogs>, author_id: string): Promise<IBlogs> {
-        const [id] = await this.db().insert(blog).insert({author_id: author_id}).returning('*');
+        const blogData : Partial<IBlogs> = {
+            title: blog.title,
+            content: blog.content,
+            author_id: author_id
+        }
+        const [id] = await this.db().insert(blogData).returning('*');
         return id;
     }
 
@@ -16,8 +21,8 @@ export class BlogModels {
         return this.db().where({ id }).first();
     }
 
-    public static async findBlogByAuthorId(author_id: string): Promise<IBlogs | undefined> {
-        return this.db().where({ author_id }).first();
+    public static async findBlogByAuthorId(author_id: string): Promise<IBlogs[] | undefined> {
+        return this.db().where({ author_id }).returning('*');
     }
 
     public static async findAllBlogs(): Promise<IBlogs[]> {

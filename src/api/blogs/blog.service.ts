@@ -21,7 +21,7 @@ export class BlogService {
     return blog;
   }
 
-  public static async findBlogByAuthorId(author_id: string): Promise<IBlogs> {
+  public static async findBlogByAuthorId(author_id: string): Promise<IBlogs[]> {
     const blog = await BlogModels.findBlogByAuthorId(author_id);
     if (!blog) {
       throw new NotFoundError("Blog not found");
@@ -43,6 +43,11 @@ export class BlogService {
   }
 
     public static async deleteBlogById(id: string): Promise<void> {
-        await BlogModels.deleteBlogById(id);
+      const blog = await BlogModels.findBlogById(id);
+      if (!blog) {
+        throw new NotFoundError("Blog not found");
+      }
+        const blogs = await BlogModels.deleteBlogById(id);
+        return blogs;
     }
 }

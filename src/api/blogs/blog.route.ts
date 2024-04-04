@@ -4,18 +4,17 @@ import { validateBody } from "../../modules/middleware";
 import {
   createBlogSchema,
   updateBlogSchema,
-  deleteBlogParamSchema,
-  getBlogParamSchema,
 } from "./blog.validation";
 
 
 const blogRouter = express.Router();
+const blog = express.Router();
 
 blogRouter.post("/post", validateBody(createBlogSchema), BlogController.createBlog);
-blogRouter.get("/", BlogController.findAllBlogs);
-blogRouter.get("/post/:id", validateBody(getBlogParamSchema), BlogController.findBlogById);
-blogRouter.get("/author/:author_id", BlogController.findBlogByAuthorId);
+blog.get("/", BlogController.findAllBlogs);
+blogRouter.get("/post/:id", BlogController.findBlogById);
+blogRouter.get("/author", BlogController.findBlogByAuthorId);
 blogRouter.put("/post/:id", validateBody(updateBlogSchema), BlogController.updateBlogById);
-blogRouter.delete("/post/:id", validateBody(deleteBlogParamSchema), BlogController.deleteBlogById);
+blogRouter.delete("/post/:id", BlogController.deleteBlogById);
 
-export { blogRouter };
+export { blogRouter, blog };
