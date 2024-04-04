@@ -14,10 +14,10 @@ This is a RESTful API for a simple blogging platform, built as an assessment pro
 
 ## Prerequisites
 
-- Node.js (version X.X.X or higher)
-- npm (version X.X.X or higher)
-- Docker (version X.X.X or higher)
-- Docker Compose (version X.X.X or higher)
+- Node.js 
+- npm 
+- Docker 
+- Docker Compose
 
 ## Getting Started
 
