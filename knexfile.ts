@@ -15,6 +15,7 @@ const connection: Knex.ConnectionConfig = {
 
 const commonConfig: Knex.Config = {
   client: 'pg',
+  debug: true,
   connection,
   pool: {
     min: 2,

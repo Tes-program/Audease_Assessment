@@ -3,6 +3,7 @@ import { IUsers } from "../../utils/interfaces/users.interface";
 import { generateAuthTokens } from "../../modules/auth";
 import { NotFoundError, UnauthorizedError } from "../../shared/error";
 import { TokenPayload } from "../../utils/interfaces/token.interface";
+import bcrypt from "bcrypt";
 
 
 export class UsersService {
@@ -11,7 +12,9 @@ export class UsersService {
         if (existingUser) {
             throw new UnauthorizedError("Username already exists");
         }
-        const users = await UserModels.createUser({ username, password } as IUsers);
+        const encryptedPassword = await bcrypt.hash(password, 10);
+
+        const users = await UserModels.createUser({ username, password: encryptedPassword } as IUsers);
         const token = generateAuthTokens(users.id);
         return token;
     }
@@ -21,7 +24,8 @@ export class UsersService {
         if (!user) {
             throw new NotFoundError("User not found");
         }
-        if (user.password !== password) {
+        const isValid = await bcrypt.compare(password, user.password);
+        if (!isValid) {
             throw new UnauthorizedError("Invalid password");
         }
         const token = generateAuthTokens(user.id);
