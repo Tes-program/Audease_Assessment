@@ -38,6 +38,10 @@ export class BlogService {
     id: string,
     blog: IBlogs
   ): Promise<IBlogs> {
+    const blogExists = await BlogModels.findBlogById(id);
+    if (!blogExists) {
+      throw new NotFoundError("Blog not found");
+    }
     const blogs = await BlogModels.updateBlogById(id, blog);
     return blogs;
   }
