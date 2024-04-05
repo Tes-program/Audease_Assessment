@@ -20,6 +20,6 @@ export class UserModels {
     }
 
     public static async deleteUser(id: string): Promise<void> {
-        return this.db().where({ id }).del();
+        return await this.db().where({ id }).del();
     }
 }
