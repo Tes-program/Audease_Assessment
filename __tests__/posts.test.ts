@@ -10,14 +10,13 @@ describe("Blog Post API", () => {
     let token: string;
     let postId: string;
     let userId: string;
-    let userToken: string;
 
     beforeAll(async () => {
-        const res = await request.post("/api/users/register").send({
+        const _res = await request.post("/api/users/register").send({
             username: "testuser",
             password: "testpassword",
         });
-        userToken = res.body.token.access;
+        expect(_res.status).toBe(201);
     }
     );
 
@@ -75,7 +74,7 @@ describe("Blog Post API", () => {
     });
 
     afterAll(async () => {
-        await request.delete(`/api/users/delete/${userId}`).set("Authorization", `Bearer ${userToken}`);
+        await request.delete(`/api/users/delete/${userId}`).set("Authorization", `Bearer ${token}`);
     });
 }
 );
